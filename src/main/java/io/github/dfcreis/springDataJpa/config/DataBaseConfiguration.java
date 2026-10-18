@@ -37,7 +37,8 @@ public class DataBaseConfiguration {
 
     @Bean
     public DataSource hikariDataSource(){
-    //documentacao do hikari no endereco (https://github.com/brettwooldridge/hikariCP)
+    //documentacao do hikari no endereco (https://github.com/brettwooldridge/)
+
         HikariConfig config = new HikariConfig();
 
         config.setJdbcUrl(url);
