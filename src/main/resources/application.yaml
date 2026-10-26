@@ -6,4 +6,3 @@ spring:
     username: postgres
     password: postgres
     driver-cass-name: org.postgresql.Driver
-

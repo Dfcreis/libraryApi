@@ -23,17 +23,18 @@ public class DataBaseConfiguration {
     @Value("${spring.datasource.driver-cass-name}")
     String driver;
 
-    //@Bean
-    public DataSource dataSource(){
-        DriverManagerDataSource dmd = new DriverManagerDataSource();
 
-        dmd.setUrl(url);
-        dmd.setUsername(user);
-        dmd.setPassword(password);
-        dmd.setDriverClassName(driver);
-
-        return dmd;
-    }
+//    @Bean
+//    public DataSource dataSource(){
+//        DriverManagerDataSource dmd = new DriverManagerDataSource();
+//
+//        dmd.setUrl(url);
+//        dmd.setUsername(user);
+//        dmd.setPassword(password);
+//        dmd.setDriverClassName(driver);
+//
+//        return dmd;
+//    }
 
     @Bean
     public DataSource hikariDataSource(){
