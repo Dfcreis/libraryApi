@@ -2,8 +2,7 @@ package io.github.dfcreis.springDataJpa.model;
 
 import jakarta.persistence.*;
 import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
+
 
 import java.time.LocalDate;
 import java.util.List;
@@ -28,6 +27,7 @@ public class Autor {
     @Column(name = "nacionalidade", length = 50, nullable = false)
     private String nacionalidade;
 
-    @OneToMany(mappedBy = "autor")//Um autor para muitos livros
+    //@OneToMany(mappedBy = "autor")//Um autor para muitos livros
+    @Transient
     private List<Livro> livros;
 }
