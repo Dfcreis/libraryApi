@@ -30,9 +30,12 @@ public class LivroRepositoryTest {
         livro.setData_publicacao(LocalDate.of(2025,5,24));
         livro.setGenero(GeneroLivro.ROMANCE);
 
-       Autor autor = autorRepository
-               .findById(UUID.fromString("8fd7bfa2-bac6-4b34-a245-ca39a386e4db"))
-               .orElse(null);
+        Autor autor = new Autor();
+        autor.setNome("Carlos");
+        autor.setNacionalidade("Brasileiro");
+        autor.setDataNascimento(LocalDate.of(2026, 10,31));
+
+        autorRepository.save(autor);
 
         livro.setAutor(autor);
 
@@ -58,6 +61,23 @@ public class LivroRepositoryTest {
         livro.setAutor(autor);
 
         repository.save(livro);
+    }
+
+    @Test
+    void atualizarAutorLivro(){
+
+        UUID idLivro = UUID.fromString("756e81ce-dfbf-47d8-847b-f5a5d8a548ee");
+        Livro livroParaAtualizar = repository.findById(idLivro).orElse(null);
+        livroParaAtualizar.setTitulo("IT a coisa");
+
+        UUID idAutor = UUID.fromString("8fd7bfa2-bac6-4b34-a245-ca39a386e4db");
+        Autor maria = autorRepository.findById(idAutor).orElse(null);
+
+        livroParaAtualizar.setAutor(maria);
+
+        repository.save(livroParaAtualizar);
+
+
     }
 
 
