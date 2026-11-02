@@ -24,14 +24,14 @@ public class LivroRepositoryTest {
     public void salvarLivroTest() {
 
         Livro livro = new Livro();
-        livro.setTitulo("31 dias para te amar");
+        livro.setTitulo("Pequeno Principe");
         livro.setIsbn("979-10-39574-20-4");
         livro.setPreco(BigDecimal.valueOf(75));
         livro.setData_publicacao(LocalDate.of(2025,5,24));
-        livro.setGenero(GeneroLivro.ROMANCE);
+        livro.setGenero(GeneroLivro.FANTASIA);
 
         Autor autor = new Autor();
-        autor.setNome("Carlos");
+        autor.setNome("joao");
         autor.setNacionalidade("Brasileiro");
         autor.setDataNascimento(LocalDate.of(2026, 10,31));
 
@@ -77,9 +77,14 @@ public class LivroRepositoryTest {
 
         repository.save(livroParaAtualizar);
 
-
     }
 
+    @Test
+    void deletar() {
+        UUID idParaDeletar = UUID.fromString("756e81ce-dfbf-47d8-847b-f5a5d8a548ee");
+        repository.deleteById(idParaDeletar);
+
+    }
 
 
 
