@@ -3,6 +3,7 @@ package io.github.dfcreis.springDataJpa.model;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.ToString;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -11,6 +12,7 @@ import java.util.UUID;
 @Entity
 @Table(name = "livros")
 @Data
+@ToString(exclude = "autor")
 public class Livro {
 
     @Id
@@ -34,7 +36,9 @@ public class Livro {
     @Column(name= "preco",precision = 18, scale = 2)
     private BigDecimal preco;
 
-    @ManyToOne//(cascade = CascadeType.ALL) muitos para um (Um autor pode ter varios livros)
+    @ManyToOne(
+            //cascade = CascadeType.ALL,
+            fetch = FetchType.LAZY) //muitos para um (Um autor pode ter varios livros)
     @JoinColumn(name= "id_autor")
     private Autor autor;
 

@@ -6,10 +6,16 @@ import io.github.dfcreis.springDataJpa.model.Livro;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.List;
 import java.util.UUID;
+
+/**
+ * @see LivroRepository
+ */
 
 @SpringBootTest
 public class LivroRepositoryTest {
@@ -86,6 +92,42 @@ public class LivroRepositoryTest {
 
     }
 
+    @Test
+    @Transactional
+    void buscarLivroCascadeTest() {
+         UUID id = UUID.fromString("aeb37f29-2a59-4bd4-832d-7161b2ef8e62");
+        Livro livro = repository.findById(id).orElse(null);
+
+        System.out.println("Livro: ");
+        System.out.println(livro.getTitulo());
+        System.out.println("Autor: ");
+        System.out.println(livro.getAutor().getNome());
+
+    }
+
+    @Test
+    void buscarLivroPorTitulo(){
+        List<Livro> listLivro = repository.findByTitulo("A princesa e o sapo");
+        listLivro.forEach(System.out::println);
+
+    }
+    @Test
+    void buscarLivroPorIsbn(){
+        List<Livro> listLivro = repository.findByIsbn("4567-1234");
+        listLivro.forEach(System.out::println);
+    }
+    @Test
+    void burcarLivroPorTituloEPreco() {
+        List<Livro> livroTituloPreco = repository.findByTituloAndPreco("A princesa e o sapo", BigDecimal.valueOf(250));
+        livroTituloPreco.forEach(System.out::println);
+    }
+
+    @Test
+    void buscarLivrosComQueryJPQL(){
+        List<Livro> resultados = repository.listarTodos();
+        resultados.forEach(System.out::println);
+
+    }
 
 
 }
