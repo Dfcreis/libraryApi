@@ -129,5 +129,44 @@ public class LivroRepositoryTest {
 
     }
 
+    @Test
+    void buscarAutorPorQuery(){
+        List<Autor> resultados = repository.buscarAutorUsandoQuery();
+        resultados.forEach(System.out::println);
+    }
+
+    @Test
+    void listarGenerosDeLivrosAutoresBrasileiros(){
+        List<String> strings = repository.listarGenerosAutorBrasileiros();
+        strings.forEach(System.out::println);
+    }
+
+    @Test
+    void listarDiferentesNomesLivros(){
+        List<String> list = repository.listarNomesDiferentesLivro();
+        list.forEach(System.out::println);
+    }
+
+    @Test
+    void listarPorGeneroQueryParamTest(){
+        List<Livro> dataPublicacao = repository.findByGenero(GeneroLivro.MISTERIO, "data_publicacao");
+        dataPublicacao.forEach(System.out::println);
+    }
+
+    @Test
+    void listarPorGeneroPositionalParameters(){
+        List<Livro> list = repository.findByGeneroPositionalParameters(GeneroLivro.ROMANCE, "data_publicacao");
+        list.forEach(System.out::println);
+    }
+
+    @Test
+    void deletarLivro(){
+        repository.deleteLivroGenero(GeneroLivro.FANTASIA);
+    }
+
+    @Test
+    void updateLivro(){
+        repository.atualizarLivro("Livro Updade",BigDecimal.valueOf(300),UUID.fromString("d28e3189-c5bd-488d-859a-de6a4d8d5d68"));
+    }
 
 }
