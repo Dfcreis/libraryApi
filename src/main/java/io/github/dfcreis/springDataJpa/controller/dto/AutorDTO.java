@@ -3,11 +3,13 @@ package io.github.dfcreis.springDataJpa.controller.dto;
 import io.github.dfcreis.springDataJpa.model.Autor;
 
 import java.time.LocalDate;
+import java.util.UUID;
 
 public record AutorDTO(
-    String nome,
-    LocalDate dataNascimento,
-    String nacionalidade
+        UUID id,
+        String nome,
+        LocalDate dataNascimento,
+        String nacionalidade
 ) {
 
     public Autor mapearParaAutor(){

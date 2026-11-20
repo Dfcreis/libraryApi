@@ -1,16 +1,16 @@
 package io.github.dfcreis.springDataJpa.controller;
 
 import io.github.dfcreis.springDataJpa.controller.dto.AutorDTO;
+import io.github.dfcreis.springDataJpa.controller.dto.AutorDtoResponta;
+import io.github.dfcreis.springDataJpa.model.Autor;
 import io.github.dfcreis.springDataJpa.service.AutorServices;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
+import java.util.Optional;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/autores")
@@ -36,6 +36,27 @@ public class AutorController {
                 .toUri();
 
         return ResponseEntity.created(location).build();
+    }
+
+    @GetMapping("{id}")
+    public ResponseEntity<AutorDtoResponta> obterDetalhes(@PathVariable("id") String id) {
+        var idAutor = UUID.fromString(id);
+        Optional<Autor> autorOptional = services.obterPorId(idAutor);
+
+        if (autorOptional.isPresent()) {
+
+            Autor autor = autorOptional.get();
+
+            AutorDtoResponta dto = new AutorDtoResponta(autor.getId(),
+                    autor.getNome(),
+                    autor.getDataNascimento(),
+                    autor.getNacionalidade());
+
+            return ResponseEntity.ok(dto);
+        }
+
+        return ResponseEntity.notFound().build();
+
     }
 
 
